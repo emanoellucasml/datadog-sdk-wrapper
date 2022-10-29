@@ -17,7 +17,8 @@ object DatadogInitializer {
         clientToken: String,
         applicationId: String,
         envName: String? = "test",
-        appVName: String? = "test"
+        appVName: String? = "test",
+        hostsList: List<String>? = null
     ) {
         val configuration = Configuration.Builder(
             true,
@@ -26,6 +27,7 @@ object DatadogInitializer {
             true
         ).trackInteractions()
             .trackLongTasks()
+            .setWebViewTrackingHosts(hostsList ?: listOf())
             .useViewTrackingStrategy(MixedViewTrackingStrategy(true))
             .useSite(DatadogSite.US1)
             .build()
